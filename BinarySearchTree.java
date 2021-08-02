@@ -15,6 +15,7 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
 
     private Node root;
     private Key minKey = null;
+    private Key maxKey = null;
 
     BinarySearchTree() {
         root = null;
@@ -26,15 +27,21 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
         else {
             root = put(key, val, root);
             updateSize(key, root);
-            updateMinNode(key, root);
+            updateBoundaries(key, root);
         }
     }
 
-    private void updateMinNode(Key key, Node node) {
+    private void updateBoundaries(Key key, Node node) {
         if (minKey == null)
             minKey = key;
         else if ((key).compareTo(minKey) < 0){
             minKey = key;
+        }
+
+        if (maxKey == null)
+            maxKey = key;
+        else if ((key).compareTo(maxKey) > 0){
+            maxKey = key;
         }
     }
 
@@ -78,7 +85,7 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
 
     @Override
     public Key max() {
-        return null;
+        return maxKey;
     }
 
     @Override

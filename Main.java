@@ -36,5 +36,13 @@ class Main {
      * Expected result for given string without whitespaces is A
      */
     System.out.println(tree.min());
+
+    /**
+     * tree.max() TEST
+     *
+     * Returns the highest key in tree
+     * Expected result for given string is U
+     */
+    System.out.println(tree.max());
   }
 }
