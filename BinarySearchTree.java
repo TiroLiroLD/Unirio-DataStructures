@@ -14,39 +14,14 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
     }
 
     private Node root;
-    private Key minKey = null;
-    private Key maxKey = null;
 
     BinarySearchTree() {
         root = null;
     }
 
     public void put(Key key, Value val) {
-        if (val == null)
-            delete(key);
-        else {
-            root = put(key, val, root);
-            updateSize(key, root);
-            updateBoundaries(key, root);
-        }
-    }
-
-    private void updateBoundaries(Key key, Node node) {
-        if (minKey == null)
-            minKey = key;
-        else if ((key).compareTo(minKey) < 0){
-            minKey = key;
-        }
-
-        if (maxKey == null)
-            maxKey = key;
-        else if ((key).compareTo(maxKey) > 0){
-            maxKey = key;
-        }
-    }
-
-    @Override
-    public void deleteMin() {
+        root = put(key, val, root);
+        updateSize(key, root);
     }
 
     public Node put(Key key, Value val, Node node) {
@@ -78,33 +53,64 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
         else return root.size;
     }
 
+/*
     @Override
     public Key min() {
         return minKey;
+    }*/
+
+    @Override
+    public Key min() {
+        if (root == null){
+            return null;
+        }
+
+        Node min = root;
+        if (root.leftSubtree != null)
+            if (root.key.compareTo(root.leftSubtree.key)>0)
+                min = root.leftSubtree;
+
+        if (root.rightSubtree != null)
+            if (min.key.compareTo(root.rightSubtree.key)>0)
+                min = root.rightSubtree;
+
+        return min.key;
+    }
+
+
+    @Override
+    public void deleteMin() {
+        //TODO
+        delete(min());
     }
 
     @Override
     public Key max() {
-        return maxKey;
+        //TODO
+        return null;
     }
 
     @Override
     public Key floor(Key ref) {
+        //TODO
         return null;
     }
 
     @Override
     public Key ceil(Key ref) {
+        //TODO
         return null;
     }
 
     @Override
     public Key select(int n) {
+        //TODO
         return null;
     }
 
     @Override
     public int rank(Key key) {
+        //TODO
         return 0;
     }
 
