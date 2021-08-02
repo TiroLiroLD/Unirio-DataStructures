@@ -29,19 +29,19 @@ public interface OrderedSymbolTable<Key extends Comparable<Key>,Value> {
 
   // // min: retorna a menor chave existente na tabela
   // //    - caso a tabela esteja vazia, retorna null
-  // public Key min();
+  public Key min();
 
   // // max: retorna a maior chave existente na tabela
   // //    - caso a tabela esteja vazia, retorna null
-  // public Key max();
+  public Key max();
 
   // // floor (piso): retorna a maior chave que seja menor ou igual à chave ref
   // //             - caso a tabela esteja vazia, retorna null
-  // public Key floor( Key ref );
+  public Key floor( Key ref );
 
   // // ceil (ceiling/teto): retorna a menor chave que seja maior ou igual à chave ref
   // //                    - caso a tabela esteja vazia, retorna null
-  // public Key ceil( Key ref );
+  public Key ceil( Key ref );
 
   // select: retorna a n-ésima menor chave presente na árvore (contando a partir de 0, isto é: a menor chave possui índice 0, a segunda menor, índice 1, etc.)
   //         - caso não haja chave com índice n, retorna null
