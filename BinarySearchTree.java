@@ -134,14 +134,50 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
 
     @Override
     public Key floor(Key ref) {
-        //TODO
+        Node floor = floor(root, ref, null);
+        if (floor != null)
+            return floor.key;
         return null;
+    }
+
+    private Node floor(Node node, Key ref, Node tempFloor){
+        if (node == null)
+            return tempFloor;
+
+        if (node.key == null)
+            return tempFloor;
+
+        if (node.key.compareTo(ref) == 0)
+            return node;
+
+        if (node.key.compareTo(ref) < 0)
+            return floor(node.rightSubtree, ref, node);
+
+        return floor(node.leftSubtree, ref, tempFloor);
     }
 
     @Override
     public Key ceil(Key ref) {
-        //TODO
+        Node ceil = ceil(root, ref, null);
+        if (ceil != null)
+            return ceil.key;
         return null;
+    }
+
+    private Node ceil(Node node, Key ref, Node tempCeil) {
+        if (node == null)
+            return tempCeil;
+
+        if (node.key == null)
+            return tempCeil;
+
+        if (node.key.compareTo(ref) == 0)
+            return node;
+
+        if (node.key.compareTo(ref) < 0)
+            return ceil(node.rightSubtree, ref, node);
+
+        return ceil(node.leftSubtree, ref, tempCeil);
     }
 
     @Override
@@ -170,5 +206,16 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
             return get(key, node.leftSubtree);
         else
             return get(key, node.rightSubtree);
+    }
+
+    private Node getNodeFromKey(Node node, Key key){
+        if (node == null)
+            return null;
+        if (node.key.compareTo(key) == 0)
+            return node;
+
+        if (node.key.compareTo(key)<0)
+            return getNodeFromKey(node.rightSubtree, key);
+        return getNodeFromKey(node.leftSubtree, key);
     }
 }

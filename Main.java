@@ -4,6 +4,8 @@ class Main {
   public static void main(String[] args) {
     BinarySearchTree<Character,Integer> tree
         = new BinarySearchTree<>();
+    BinarySearchTree<Character,Integer> treeDeleteTest
+            = new BinarySearchTree<>();
 
 
     /**
@@ -24,11 +26,13 @@ class Main {
       }
       count++;
       tree.put( c, count );
+      treeDeleteTest.put( c, count );
     }
     String test = "ADEIORSTU";
     for( char c : test.toCharArray() ) {
       System.out.println( c + " " + tree.get(c) );
     }
+
 /*
 
     String name = "123456789237654";
@@ -74,17 +78,37 @@ class Main {
      */
 
     System.out.printf("\n==== deleteMin() ==== \n");
-    printMin(tree);
-    printTreeSize(tree);
+    printMin(treeDeleteTest);
+    printTreeSize(treeDeleteTest);
     System.out.printf("\ndeleteMin(): \n");
-    tree.deleteMin();
-    printMin(tree);
-    printTreeSize(tree);
+    treeDeleteTest.deleteMin();
+    printMin(treeDeleteTest);
+    printTreeSize(treeDeleteTest);
     System.out.printf("\ndeleteMin(): \n");
-    tree.deleteMin();
-    printMin(tree);
-    printTreeSize(tree);
+    treeDeleteTest.deleteMin();
+    printMin(treeDeleteTest);
+    printTreeSize(treeDeleteTest);
 
+    /**
+     * tree.floor(Key) TEST
+     *
+     * Return max key lower than or equal to given Key
+     */
+
+    System.out.printf("\n==== floor(Key) ==== \n");
+    System.out.printf("floor('E'): " + tree.floor('E') + "\n");
+    System.out.printf("floor('B'): " + tree.floor('B') + "\n");
+
+    /**
+     * tree.ceil(Key) TEST
+     *
+     * Return max key lower than or equal to given Key
+     */
+
+    System.out.printf("\n==== ceil(Key) ==== \n");
+    System.out.printf("ceil('E'): " + tree.ceil('E') + "\n");
+    System.out.printf("ceil('F'): " + tree.ceil('F') + "\n");
+    System.out.printf("ceil('B'): " + tree.ceil('B') + "\n");
 
   }
 
