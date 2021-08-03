@@ -182,8 +182,24 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
 
     @Override
     public Key select(int n) {
-        //TODO
-        return null;
+        return select(root, n).key;
+    }
+
+    private Node select(Node node, int n){
+        int k;
+        if (node == null)
+            return null;
+        if (node.key == null)
+            return null;
+        if (!hasLeftSubtree(node))
+            k = 0;
+        else
+            k = node.leftSubtree.size;
+        if (k == n)
+            return node;
+        if (k > n)
+            return select(node.leftSubtree, n);
+        return select(node.rightSubtree, n-k-1);
     }
 
     @Override
