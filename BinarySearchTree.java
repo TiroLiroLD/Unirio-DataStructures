@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSymbolTable<Key, Value> {
     private class Node {
         public Key key;
@@ -53,41 +55,81 @@ class BinarySearchTree<Key extends Comparable<Key>, Value> implements OrderedSym
         else return root.size;
     }
 
-/*
     @Override
     public Key min() {
-        return minKey;
-    }*/
+        return min(root).key;
+    }
 
-    @Override
-    public Key min() {
-        if (root == null){
+    private Node min(Node node){
+        if (node.val == null)
             return null;
-        }
-
-        Node min = root;
-        if (root.leftSubtree != null)
-            if (root.key.compareTo(root.leftSubtree.key)>0)
-                min = root.leftSubtree;
-
-        if (root.rightSubtree != null)
-            if (min.key.compareTo(root.rightSubtree.key)>0)
-                min = root.rightSubtree;
-
-        return min.key;
+        if (!hasLeftSubtree(node))
+            return node;
+        return min(node.leftSubtree);
     }
 
 
     @Override
     public void deleteMin() {
-        //TODO
-        delete(min());
+        if (root == null)
+            return;
+        if (root.key.compareTo(min()) == 0){
+            root = root.rightSubtree;
+            return;
+        }
+        deleteNodeFromKey(root, min());
+        root.size--;
+    }
+
+    private Node deleteNodeFromKey(Node node, Key key){
+        if (node == null)
+            return null;
+
+        if (key.compareTo(node.key) < 0) {
+            node.leftSubtree = deleteNodeFromKey(node.leftSubtree, key);
+            return node;
+        }
+
+        if (key.compareTo(node.key) > 0){
+            node.rightSubtree = deleteNodeFromKey(node.rightSubtree, key);
+            return node;
+        }
+
+        if (!hasRightSubtree(node))
+            return node.leftSubtree;
+
+        if (!hasLeftSubtree(node))
+            return node.rightSubtree;
+
+        Node replace = min(node.rightSubtree);
+        delete(Objects.requireNonNull(min(node.rightSubtree)).key);
+        root.size--;
+        return replace;
+    }
+
+    private boolean hasRightSubtree(Node node){
+        if (node.rightSubtree != null)
+            return node.rightSubtree.val != null;
+        return false;
+    }
+
+    private boolean hasLeftSubtree(Node node){
+        if (node.leftSubtree != null)
+            return node.leftSubtree.val != null;
+        return false;
     }
 
     @Override
     public Key max() {
-        //TODO
-        return null;
+        return max(root).key;
+    }
+
+    private Node max(Node node){
+        if (node.val == null)
+            return null;
+        if (!hasRightSubtree(node))
+            return node;
+        return max(node.rightSubtree);
     }
 
     @Override

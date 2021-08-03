@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class Main {
   public static void main(String[] args) {
     BinarySearchTree<Character,Integer> tree
@@ -14,7 +16,7 @@ class Main {
      * that have at least one entry. Other chars could also be
      * given as test, returning null as result.
      * */
-    /*String name = "ESTRUTURAS DE DADOS II";
+    String name = "ESTRUTURASDEDADOSII";
     for( char c : name.toCharArray() ) {
       Integer count = tree.get(c);
       if( count == null ) {
@@ -23,10 +25,11 @@ class Main {
       count++;
       tree.put( c, count );
     }
-    String test = "ADEIORSTU ";
+    String test = "ADEIORSTU";
     for( char c : test.toCharArray() ) {
       System.out.println( c + " " + tree.get(c) );
-    }*/
+    }
+/*
 
     String name = "123456789237654";
     for( char c : name.toCharArray() ) {
@@ -41,6 +44,7 @@ class Main {
     for( char c : test.toCharArray() ) {
       System.out.println( c + " " + tree.get(c) );
     }
+*/
 
     /**
      * tree.min() TEST - OK
@@ -49,7 +53,8 @@ class Main {
      * Expected result for given string is a whitespace
      * Expected result for given string without whitespaces is A
      */
-    System.out.println(tree.min());
+    System.out.printf("\n==== min() ==== \n");
+    System.out.printf("min(): " + tree.min() + "\n");
 
     /**
      * tree.max() TEST - OK
@@ -57,7 +62,8 @@ class Main {
      * Returns the highest key in tree
      * Expected result for given string is U
      */
-    System.out.println(tree.max());
+    System.out.printf("\n==== max() ==== \n");
+    System.out.printf("max(): " + tree.max() + "\n");
 
     /**
      * tree.deleteMin() TEST
@@ -66,14 +72,31 @@ class Main {
      * Expected tree.min() result for given string after
      * tree.deleteMin() is A
      */
-    System.out.println(tree.min());
 
-    /**
-     * tree.min() TEST - OK
-     *
-     * Return lowest key in given tree
-     */
-    System.out.println(tree.min());
+    System.out.printf("\n==== deleteMin() ==== \n");
+    printMin(tree);
+    printTreeSize(tree);
+    System.out.printf("\ndeleteMin(): \n");
+    tree.deleteMin();
+    printMin(tree);
+    printTreeSize(tree);
+    System.out.printf("\ndeleteMin(): \n");
+    tree.deleteMin();
+    printMin(tree);
+    printTreeSize(tree);
+
 
   }
+
+  private static void printTreeSize(
+          BinarySearchTree<Character, Integer> tree){
+    System.out.printf("Tamanho = " + tree.size() + "\n");
+  }
+
+  private static void printMin(
+          BinarySearchTree<Character, Integer> tree){
+    System.out.printf("min(): " + tree.min() + "\n");
+  }
+
+
 }
